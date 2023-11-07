@@ -1,0 +1,25 @@
+def create_cipher_matrix(cipher, transpositionKey):
+    matrix = []
+    for i in range(0, len(cipher), transpositionKey):
+        row = cipher[i:i + transpositionKey]
+        if len(row) < transpositionKey:
+            row += "*" * (transpositionKey -len(row))
+        matrix.append(row)
+    return matrix
+        
+inputString = input("Enter the input string: ")
+transpositionKey = int(input("Enter the Transposition Key: "))
+cipher_matrix = create_cipher_matrix(inputString, transpositionKey)
+print(cipher_matrix)
+for row in cipher_matrix:
+    print(" ".join(row))
+    
+print("Transposition Cipher : ")
+productCipher = []
+for colIndex in range(transpositionKey):
+    column = []
+    for row in cipher_matrix:
+        if colIndex < len(row):
+            column.append(row[colIndex])
+    productCipher.append("".join(column))
+print("".join(productCipher))
